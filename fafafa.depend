@@ -1,5 +1,10 @@
 # depslib dependency file v1.0
-1584205420 source:c:\users\nico\desktop\tp_numero4_orga\main.c
+1602806437 source:c:\users\nico\desktop\tp_numero4_orga\main.c
+	<stdio.h>
+	<stdlib.h>
+	"TDACazorla.h"
+
+1602806291 c:\users\nico\desktop\tp_numero4_orga\tdacazorla.h
 	<stdio.h>
 	<stdlib.h>
 

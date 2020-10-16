@@ -1,13 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-typedef struct {
-    long int DNI;
-    char nombre[15];
-    unsigned short int edad;
-    char categoria, sexo;
-    unsigned int tiempo;
-} regCorredor;
+#include "TDACazorla.h"
 
 int funcionHash(long int DNI);
 void alta() ;
@@ -67,3 +60,46 @@ void alta() {
         printf("No existe el archivo.");
 }
 
+void Modif(regCorredor reg, char *file)
+{
+    long int pos;
+    FILE *arch;
+    arch=fopen(file,"rb+");
+    if (!arch)
+        printf("\n El archivo que sea modificar no existe");
+    else
+    {
+        pos=BuscaExist(arch,reg.DNI % 11987,reg);
+        if (pos>0)
+        {
+            fseek(arch,pos,1);
+            fwrite(&reg,sizeof(regCorredor),1,arch);
+        }
+        else
+            printf("\nEl participante que desea modificar no existe");
+    }
+    fclose(arch);
+}
+
+void Baja(regCorredor reg, char *file)
+{
+    long int pos;
+    FILE *arch;
+    arch=fopen(file,"rb+");
+    if (!arch)
+        printf("\nEl archivo que sea modificar no existe");
+    else
+    {
+        pos=BuscaExist(arch,reg.DNI % 11987,reg);
+        if (pos>0)
+        {
+            fseek(arch,pos,1);
+            fread(&reg,sizeof(regCorredor),1,arch);
+            fseek(arch,pos,1);
+            fwrite(&reg,sizeof(regCorredor),1,arch);
+        }
+        else
+            printf("\n El participante que desea eliminar no existe");
+    }
+    fclose(arch);
+}
